@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecraft:block/dirt",
+    "side": "artificialheart:block/pink_grass_block_side",
+    "particle": "artificialheart:block/pink_grass_block_side",
+    "top": "artificialheart:block/pink_grass_block_top"
+  }
+}

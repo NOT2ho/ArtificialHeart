@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 2,
+  "group": "heart",
+  "ingredient": {
+    "item": "artificialheart:raw_heart"
+  },
+  "result": "artificialheart:heart_ingot"
+}

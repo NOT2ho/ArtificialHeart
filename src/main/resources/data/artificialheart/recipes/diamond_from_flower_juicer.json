@@ -1,0 +1,12 @@
+{
+  "type": "artificialheart:flower_juicer",
+  "ingredients": [
+    {
+      "item": "minecraft:poppy"
+    }
+  ],
+  "output": {
+    "count": 7,
+    "item": "minecraft:diamond"
+  }
+}
