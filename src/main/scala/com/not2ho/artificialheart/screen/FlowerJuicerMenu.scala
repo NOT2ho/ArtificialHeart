@@ -24,20 +24,21 @@ object FlowerJuicerMenu {
   private val VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT
   private val VANILLA_FIRST_SLOT_INDEX = 0
   private val TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT
-  private val TE_INVENTORY_SLOT_COUNT = 2
+  private val TE_INVENTORY_SLOT_COUNT = 3
 
 }
 
 class FlowerJuicerMenu(pContainerId: Int, inv: Inventory, entity: BlockEntity, private var data: ContainerData) extends AbstractContainerMenu(MenuTypes.FLOWER_JUICER_MENU.get(), pContainerId) {
-  checkContainerSize(inv, 2)
+  checkContainerSize(inv, 3)
   blockEntity = entity.asInstanceOf[FlowerJuicerEntity]
   this.level = inv.player.level
   addPlayerInventory(inv)
   addPlayerHotbar(inv)
   this.data = data
   blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler => {
-    this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 11))
-    this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 59))
+    this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 11))
+    this.addSlot(new SlotItemHandler(iItemHandler, 2, 50, 20))
+    this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 59))
 
   })
   addDataSlots(data)
@@ -45,7 +46,7 @@ class FlowerJuicerMenu(pContainerId: Int, inv: Inventory, entity: BlockEntity, p
   final private var level: Level = _
 
   def this(pContainerId: Int, inv: Inventory, extraData: FriendlyByteBuf) = {
-    this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos), new SimpleContainerData(2))
+    this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos), new SimpleContainerData(3))
   }
 
   def isCrafting: Boolean = data.get(0) > 0
@@ -82,8 +83,8 @@ class FlowerJuicerMenu(pContainerId: Int, inv: Inventory, entity: BlockEntity, p
   }
 
   override def stillValid(pPlayer: Player): Boolean = AbstractContainerMenu.stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos),
-                                                                                      pPlayer,
-                                                                                      ArtificialHeart.FLOWER_JUICER.get)
+    pPlayer,
+    ArtificialHeart.FLOWER_JUICER.get)
 
   private def addPlayerInventory(playerInventory: Inventory): Unit = {
     for (i <- 0 until 3) {

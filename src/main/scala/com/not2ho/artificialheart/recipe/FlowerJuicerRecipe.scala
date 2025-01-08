@@ -19,7 +19,7 @@ import scala.jdk.CollectionConverters.*
 
 object FlowerJuicerRecipe {
   object Type {
-    val INSTANCE:Type = new FlowerJuicerRecipe.Type
+    val INSTANCE: Type = new FlowerJuicerRecipe.Type
     val ID: String = "flower_juicer"
   }
 
@@ -38,7 +38,11 @@ object FlowerJuicerRecipe {
       for (i <- 0 until inputs.size) {
         inputs.set(i, Ingredient.fromJson(ingredients.get(i)))
       }
+      println(output)
+      println(ingredients)
+      println(inputs)
       new FlowerJuicerRecipe(inputs, output, pRecipeId)
+
     }
 
     @Nullable override def fromNetwork(pRecipeId: ResourceLocation, pBuffer: FriendlyByteBuf): FlowerJuicerRecipe = {
@@ -63,7 +67,7 @@ object FlowerJuicerRecipe {
 class FlowerJuicerRecipe(private val inputItems: NonNullList[Ingredient], private val output: ItemStack, private val id: ResourceLocation) extends Recipe[SimpleContainer] {
   override def matches(pContainer: SimpleContainer, pLevel: Level): Boolean = {
     if (pLevel.isClientSide) return false
-    inputItems.get(0).test(pContainer.getItem(0))
+    inputItems.get(0).test(pContainer.getItem(1))
   }
 
   override def getIngredients: NonNullList[Ingredient] = inputItems

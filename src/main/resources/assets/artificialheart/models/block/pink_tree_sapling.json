@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "artificialheart:block/pink_tree_sapling"
+  }
+}
