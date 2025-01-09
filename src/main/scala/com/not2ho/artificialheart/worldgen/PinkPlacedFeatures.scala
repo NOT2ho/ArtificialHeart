@@ -1,6 +1,7 @@
 package com.not2ho.artificialheart.worldgen
 
 import com.not2ho.artificialheart.ArtificialHeart
+import com.not2ho.artificialheart.block.PinkBlocks.PINK_TREE_SAPLING
 import net.minecraft.core.Holder
 import net.minecraft.core.HolderGetter
 import net.minecraft.core.registries.Registries
@@ -25,7 +26,7 @@ object PinkPlacedFeatures {
   def bootstrap(context: BootstapContext[PlacedFeature]): Unit = {
     val configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE)
     register(context, HEART_ORE_PLACED_KEY, configuredFeatures.getOrThrow(PinkConfiguredFeatures.OVERWORLD_HEART_ORE_KEY), PinkOrePlacement.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(3))))
-    register(context, PINK_TREE_PLACED_KEY, configuredFeatures.getOrThrow(PinkConfiguredFeatures.PINK_TREE_KEY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2), ArtificialHeart.PINK_TREE_SAPLING.get))
+    register(context, PINK_TREE_PLACED_KEY, configuredFeatures.getOrThrow(PinkConfiguredFeatures.PINK_TREE_KEY), VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),PINK_TREE_SAPLING.get))
   }
 
   private def registerKey(name: String) = ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(ArtificialHeart.MOD_ID, name))

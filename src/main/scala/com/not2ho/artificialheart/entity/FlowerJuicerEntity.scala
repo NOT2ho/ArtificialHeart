@@ -1,6 +1,7 @@
 package com.not2ho.artificialheart.entity
 
 import com.not2ho.artificialheart.entity.FlowerJuicerEntity.{BEAKER_ITEM, BEAKER_SLOT, FUEL_ITEM, FUEL_SLOT, INGREDIENT_SLOT}
+import com.not2ho.artificialheart.item.PinkItems.{BEAKER, MASHED_HEART}
 import com.not2ho.artificialheart.{ArtificialHeart, recipe}
 import com.not2ho.artificialheart.recipe.FlowerJuicerRecipe
 import com.not2ho.artificialheart.screen.FlowerJuicerMenu
@@ -41,8 +42,8 @@ object FlowerJuicerEntity {
 //  private val SLOTS_FOR_UP = Array[Int](1)
 //  private val SLOTS_FOR_DOWN = Array[Int](0, 1)
 //  private val SLOTS_FOR_SIDES = Array[Int](0, 2)
-  val FUEL_ITEM = ArtificialHeart.MASHED_HEART
-  val BEAKER_ITEM = ArtificialHeart.BEAKER
+  val FUEL_ITEM = MASHED_HEART.get()
+  val BEAKER_ITEM = BEAKER.get()
 
 }
 
@@ -164,7 +165,7 @@ class FlowerJuicerEntity(pPos: BlockPos, pBlockState: BlockState) extends BlockE
     if (recipe.isEmpty) return false
     val result = recipe.get.getResultItem(getLevel.registryAccess)
 
-    canInsertItemIntoBeakerslot(ArtificialHeart.BEAKER.get())
+    isBeakerExist(BEAKER_ITEM) && isFuelExist(FUEL_ITEM)
   }
 
   private def getCurrentRecipe = {
@@ -175,9 +176,9 @@ class FlowerJuicerEntity(pPos: BlockPos, pBlockState: BlockState) extends BlockE
     this.level.getRecipeManager.getRecipeFor(FlowerJuicerRecipe.Type.INSTANCE, inventory, level)
   }
 
-  private def canInsertItemIntoBeakerslot(item: Item) = this.itemHandler.getStackInSlot(FlowerJuicerEntity.BEAKER_SLOT).is(item)
+  private def isBeakerExist(item: Item) = this.itemHandler.getStackInSlot(FlowerJuicerEntity.BEAKER_SLOT).is(item)
 
-  //private def canInsertAmountIntoBeakerslot(count: Int) = true //if this.itemHandler.getStackInSlot(FlowerJuicerEntity.BEAKER_SLOT).getCount == 0 then true else false
+  private def isFuelExist(item: Item) = this.itemHandler.getStackInSlot(FlowerJuicerEntity.FUEL_SLOT).is(item)
 
   private def hasProgressFinished = progress >= maxProgress
 

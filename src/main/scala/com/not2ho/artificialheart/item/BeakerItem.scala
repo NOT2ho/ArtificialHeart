@@ -1,6 +1,7 @@
 package com.not2ho.artificialheart.item
 
 import com.not2ho.artificialheart.ArtificialHeart
+import com.not2ho.artificialheart.item.PinkItems.BEAKER
 import net.minecraft.advancements.CriteriaTriggers
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.stats.Stats
@@ -32,8 +33,8 @@ class BeakerItem(pProperties: Properties) extends PotionItem(pProperties) {
       if (!player.getAbilities.instabuild) pStack.shrink(1)
     }
     if (player == null || !player.getAbilities.instabuild) {
-      if (pStack.isEmpty) return new ItemStack(ArtificialHeart.BEAKER.get())
-      if (player != null) player.getInventory.add(new ItemStack(ArtificialHeart.BEAKER.get()))
+      if (pStack.isEmpty) return new ItemStack(BEAKER.get())
+      if (player != null) player.getInventory.add(new ItemStack(BEAKER.get()))
     }
     pEntityLiving.gameEvent(GameEvent.DRINK)
     pStack

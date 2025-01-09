@@ -1,6 +1,7 @@
 package com.not2ho.artificialheart.worldgen
 
 import com.not2ho.artificialheart.ArtificialHeart
+import com.not2ho.artificialheart.block.PinkBlocks.{DEEPSLATE_HEART_ORE, HEART_ORE, PINK_TREE_LEAVES, PINK_TREE_LOG}
 import com.not2ho.artificialheart.worldgen.tree.{PinkTreeFoliagePlacer, PinkTreeTrunkPlacer}
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.worldgen.BootstapContext
@@ -28,12 +29,12 @@ object PinkConfiguredFeatures {
   def bootstrap(context: BootstapContext[ConfiguredFeature[_, _]]): Unit = {
     val stoneReplaceable = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES)
     val deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
-    val overworldHeartOres = util.List.of(OreConfiguration.target(stoneReplaceable, ArtificialHeart.HEART_ORE.get.defaultBlockState), OreConfiguration.target(deepslateReplaceables, ArtificialHeart.DEEPSLATE_HEART_ORE.get.defaultBlockState))
+    val overworldHeartOres = util.List.of(OreConfiguration.target(stoneReplaceable, HEART_ORE.get.defaultBlockState), OreConfiguration.target(deepslateReplaceables, DEEPSLATE_HEART_ORE.get.defaultBlockState))
     register(context, OVERWORLD_HEART_ORE_KEY, Feature.ORE, new OreConfiguration(overworldHeartOres, 9))
     register(context, PINK_TREE_KEY, Feature.TREE
-      , new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(ArtificialHeart.PINK_TREE_LOG.get)
+      , new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(PINK_TREE_LOG.get)
       , new PinkTreeTrunkPlacer(8, 40, 3)
-      , BlockStateProvider.simple(ArtificialHeart.PINK_TREE_LEAVES.get)
+      , BlockStateProvider.simple(PINK_TREE_LEAVES.get)
       , new PinkTreeFoliagePlacer(ConstantInt.of(8), ConstantInt.of(6), 7)
       , new TwoLayersFeatureSize(1, 0, 2)).build)
   }

@@ -1,6 +1,7 @@
 package com.not2ho.artificialheart.screen
 
 import com.not2ho.artificialheart.ArtificialHeart
+import com.not2ho.artificialheart.block.PinkBlocks.FLOWER_JUICER
 import com.not2ho.artificialheart.entity.FlowerJuicerEntity
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
@@ -84,7 +85,7 @@ class FlowerJuicerMenu(pContainerId: Int, inv: Inventory, entity: BlockEntity, p
 
   override def stillValid(pPlayer: Player): Boolean = AbstractContainerMenu.stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos),
     pPlayer,
-    ArtificialHeart.FLOWER_JUICER.get)
+    FLOWER_JUICER.get)
 
   private def addPlayerInventory(playerInventory: Inventory): Unit = {
     for (i <- 0 until 3) {

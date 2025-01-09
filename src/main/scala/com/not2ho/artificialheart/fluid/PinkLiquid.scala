@@ -1,6 +1,8 @@
 package com.not2ho.artificialheart.fluid
 
 import com.not2ho.artificialheart.ArtificialHeart
+import com.not2ho.artificialheart.block.PinkBlocks.PINK_LIQUID_BLOCK
+import com.not2ho.artificialheart.item.PinkItems.PINK_LIQUID_BUCKET
 import net.minecraft.world.level.material.FlowingFluid
 import net.minecraft.world.level.material.Fluid
 import net.minecraftforge.eventbus.api.IEventBus
@@ -20,8 +22,8 @@ object PinkLiquid {
   
   val PINK_LIQUID_FLUID_PROPERTIES: ForgeFlowingFluid.Properties = new ForgeFlowingFluid.Properties(
     PinkFluid.PINK_LIQUID_FLUID_TYPE, SOURCE_PINK_LIQUID, FLOWING_PINK_LIQUID)
-    .slopeFindDistance(5).levelDecreasePerBlock(1).block(ArtificialHeart.PINK_LIQUID_BLOCK)
-    .bucket(ArtificialHeart.PINK_LIQUID_BUCKET)
+    .slopeFindDistance(5).levelDecreasePerBlock(1).block(PINK_LIQUID_BLOCK)
+    .bucket(PINK_LIQUID_BUCKET)
 
 
   val register: IEventBus => Unit = (eventBus: IEventBus ) =>
