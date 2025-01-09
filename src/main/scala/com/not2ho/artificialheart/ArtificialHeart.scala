@@ -6,7 +6,9 @@ import com.not2ho.artificialheart.fluid.{PinkFluid, PinkLiquid}
 import com.not2ho.artificialheart.item.{BeakerItem, PinkToolTiers}
 import com.not2ho.artificialheart.recipe.PinkRecipe
 import com.not2ho.artificialheart.screen.{FlowerJuicerScreen, MenuTypes}
-import com.not2ho.artificialheart.worldgen.tree.{Features, FoliagePlacers, PinkTreeGrower, TrunkPlacerTypes}
+import com.not2ho.artificialheart.util.PinkDatapackBuiltinEntriesProvider
+import com.not2ho.artificialheart.worldgen.PinkConfiguredFeatures
+import com.not2ho.artificialheart.worldgen.tree.{FoliagePlacers, PinkTreeGrower, TrunkPlacerTypes}
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.MenuScreens
 import net.minecraft.core.registries.Registries
@@ -23,6 +25,7 @@ import net.minecraft.core.{BlockPos, Direction}
 import net.minecraft.util.valueproviders.UniformInt
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.level.BlockGetter
+import net.minecraftforge.data.event.GatherDataEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
@@ -72,14 +75,75 @@ object ArtificialHeart {
   .stacksTo(1)
   ))
 
-  val POPPY_JUICE: RegistryObject[Item] = ITEMS.register("poppy_juice", ()
-  => new BeakerItem(new Item.Properties()
+  val POPPY_JUICE: RegistryObject[Item] = ITEMS.register("poppy_juice"
+    , () => new BeakerItem(new Item.Properties()
     .food(new FoodProperties.Builder().alwaysEat()
         .build())))
-  val DANDELION_JUICE: RegistryObject[Item] = ITEMS.register("dandelion_juice", () => new BeakerItem(new Item.Properties()
+  val DANDELION_JUICE: RegistryObject[Item] = ITEMS.register("dandelion_juice"
+    , () => new BeakerItem(new Item.Properties()
     .stacksTo(1)
     .food(new FoodProperties.Builder().alwaysEat()
     .build())))
+  val ALLIUM_JUICE: RegistryObject[Item] = ITEMS.register("allium_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val AZURE_BLUET_JUICE: RegistryObject[Item] = ITEMS.register("azure_bluet_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val BLUE_ORCHID_JUICE: RegistryObject[Item] = ITEMS.register("blue_orchid_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val CORNFLOWER_JUICE: RegistryObject[Item] = ITEMS.register("cornflower_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val LILAC_JUICE: RegistryObject[Item] = ITEMS.register("lilac_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val LILY_OF_THE_VALLEY_JUICE: RegistryObject[Item] = ITEMS.register("lily_of_the_valley_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val OXEYE_DAISY_JUICE: RegistryObject[Item] = ITEMS.register("oxeye_daisy_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val PEONY_JUICE: RegistryObject[Item] = ITEMS.register("peony_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val SUNFLOWER_JUICE: RegistryObject[Item] = ITEMS.register("sunflower_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val TULIP_JUICE: RegistryObject[Item] = ITEMS.register("tulip_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+  val WITHER_ROSE_JUICE: RegistryObject[Item] = ITEMS.register("wither_rose_juice"
+    , () => new BeakerItem(new Item.Properties()
+      .stacksTo(1)
+      .food(new FoodProperties.Builder().alwaysEat()
+        .build())))
+
+
+
+
+
   val CUTTER: RegistryObject[Item] = ITEMS.register("cutter", () => new SwordItem(PinkToolTiers.HEART, 1, 10, new Item.Properties()))
   val CLEAVER: RegistryObject[Item] = ITEMS.register("cleaver", () => new SwordItem(PinkToolTiers.HEART, 10, 0.1, new Item.Properties()))
 
@@ -107,7 +171,8 @@ object ArtificialHeart {
     .explosionResistance(0.5f)
     .sound(SoundType.PINK_PETALS)))
 
-  
+  val PINK_TREE_PLANK: RegistryObject[Block] = BLOCKS.register("pink_tree_plank", () => new Block(BlockBehaviour.Properties.of()
+    .strength(2f)))
 
   val PINK_TREE_SAPLING: RegistryObject[Block] = BLOCKS.register("pink_tree_sapling"
     , () => new SaplingBlock(new PinkTreeGrower(), BlockBehaviour.Properties.copy(Blocks.CHERRY_SAPLING)))
@@ -132,6 +197,8 @@ object ArtificialHeart {
   val PINK_TREE_LEAVES_ITEM: RegistryObject[Item] = ITEMS.register("pink_tree_leaves"
     , () => new BlockItem(PINK_TREE_LEAVES.get(), new Item.Properties()))
 
+  val PINK_TREE_PLANK_ITEM: RegistryObject[Item] = ITEMS.register("pink_tree_plank"
+    , () => new BlockItem(PINK_TREE_PLANK.get(), new Item.Properties()))
 
   val PINK_GRASS_BLOCK_ITEM: RegistryObject[Item] = ITEMS.register("pink_grass_block"
     , () => new BlockItem(PINK_GRASS_BLOCK.get(), new Item.Properties()))
@@ -148,6 +215,33 @@ object ArtificialHeart {
     .icon(() => PINK_GRASS_BLOCK_ITEM.get().getDefaultInstance)
     .displayItems((parameters, output) => {
       output.accept(PINK_GRASS_BLOCK_ITEM.get())
+      output.accept(PINK_TREE_LOG_ITEM.get())
+      output.accept(PINK_TREE_LEAVES_ITEM.get())
+      output.accept(PINK_TREE_SAPLING_ITEM.get())
+      output.accept(HEART_BLOCK_ITEM.get())
+      output.accept(HEART_ORE_ITEM.get())
+      output.accept(DEEPSLATE_HEART_ORE_ITEM.get())
+      output.accept(RAW_HEART.get())
+      output.accept(HEART_INGOT.get())
+      output.accept(PINK_LIQUID_BUCKET.get())
+      output.accept(MASHED_HEART.get())
+      output.accept(CUTTER.get())
+      output.accept(CLEAVER.get())
+      output.accept(BEAKER.get())
+      output.accept(POPPY_JUICE.get())
+      output.accept(DANDELION_JUICE.get())
+      output.accept(ALLIUM_JUICE.get())
+      output.accept(AZURE_BLUET_JUICE.get())
+      output.accept(BLUE_ORCHID_JUICE.get())
+      output.accept(CORNFLOWER_JUICE.get())
+      output.accept(LILAC_JUICE.get())
+      output.accept(LILY_OF_THE_VALLEY_JUICE.get())
+      output.accept(OXEYE_DAISY_JUICE.get())
+      output.accept(SUNFLOWER_JUICE.get())
+      output.accept(TULIP_JUICE.get())
+      output.accept(WITHER_ROSE_JUICE.get())
+      output.accept(PINK_TREE_PLANK_ITEM.get())
+
     }).build()
   )
 
@@ -175,6 +269,8 @@ object ArtificialHeart {
     modEventBus.addListener(this.addCreative)
     ModLoadingContext.get.registerConfig(ModConfig.Type.COMMON, Config.SPEC)
 
+    modEventBus.addListener(this.dataSetup)
+
     if (FMLEnvironment.dist.isClient) {
       modEventBus.addListener(this.onClientSetup)
     }
@@ -188,9 +284,24 @@ object ArtificialHeart {
       event.accept(PINK_GRASS_BLOCK)
   }
 
+  private def dataSetup(event: GatherDataEvent): Unit = {
+    val generator = event.getGenerator
+    val output = generator.getPackOutput
+    val provider = event.getLookupProvider
+    val helper = event.getExistingFileHelper
+    val server = event.includeServer
+    val datapackEntries = new PinkDatapackBuiltinEntriesProvider(output, provider)
+      generator.addProvider(server, datapackEntries)
+//    provider = datapackEntries.getRegistryProvider
+//    val client = event.includeClient
+  }
+
+
   @SubscribeEvent
   def onServerStarting(event: ServerStartingEvent): Unit = {
   }
+
+
 
   def onClientSetup(event: FMLClientSetupEvent): Unit = {
     ItemBlockRenderTypes.setRenderLayer(PinkLiquid.SOURCE_PINK_LIQUID.get(), RenderType.translucent)
