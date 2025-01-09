@@ -2,15 +2,13 @@ package com.not2ho.artificialheart.fluid
 
 import com.not2ho.artificialheart
 import com.not2ho.artificialheart.ArtificialHeart
-import org.joml.Vector3f
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.sounds.SoundEvents
 import net.minecraftforge.common.SoundAction
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.fluids.FluidType
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.ForgeRegistries
-import net.minecraftforge.registries.RegistryObject
+import net.minecraftforge.registries.{DeferredRegister, ForgeRegistries, RegistryObject}
+import org.joml.Vector3f
 
 object PinkFluid {
 	val WATER_STILL_RL: ResourceLocation = new ResourceLocation("block/water_still")

@@ -1,6 +1,7 @@
 package com.not2ho.artificialheart.worldgen
 
-import net.minecraft.world.level.levelgen.placement._
+import net.minecraft.world.level.levelgen.placement.*
+
 import java.util
 
 

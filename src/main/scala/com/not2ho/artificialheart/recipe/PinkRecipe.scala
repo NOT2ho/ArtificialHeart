@@ -3,9 +3,7 @@ package com.not2ho.artificialheart.recipe
 import com.not2ho.artificialheart.ArtificialHeart
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraftforge.eventbus.api.IEventBus
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.ForgeRegistries
-import net.minecraftforge.registries.RegistryObject
+import net.minecraftforge.registries.{DeferredRegister, ForgeRegistries, RegistryObject}
 
 
 object PinkRecipe {

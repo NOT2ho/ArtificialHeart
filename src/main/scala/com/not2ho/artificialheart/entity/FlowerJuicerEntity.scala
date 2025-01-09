@@ -1,35 +1,26 @@
 package com.not2ho.artificialheart.entity
 
-import com.not2ho.artificialheart.entity.FlowerJuicerEntity.{BEAKER_ITEM, BEAKER_SLOT, FUEL_ITEM, FUEL_SLOT, INGREDIENT_SLOT}
+import com.not2ho.artificialheart.entity.FlowerJuicerEntity.*
 import com.not2ho.artificialheart.item.PinkItems.{BEAKER, MASHED_HEART}
-import com.not2ho.artificialheart.{ArtificialHeart, recipe}
+import com.not2ho.artificialheart.recipe
 import com.not2ho.artificialheart.recipe.FlowerJuicerRecipe
 import com.not2ho.artificialheart.screen.FlowerJuicerMenu
-import net.minecraft.core.{BlockPos, Direction, NonNullList}
+import net.minecraft.core.{BlockPos, Direction}
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.Component
 import net.minecraft.network.protocol.Packet
-import net.minecraft.network.protocol.game.ClientGamePacketListener
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
-import net.minecraft.world.Containers
-import net.minecraft.world.MenuProvider
-import net.minecraft.world.SimpleContainer
-import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.entity.player.Player
+import net.minecraft.network.protocol.game.{ClientGamePacketListener, ClientboundBlockEntityDataPacket}
+import net.minecraft.world.entity.player.{Inventory, Player}
 import net.minecraft.world.inventory.ContainerData
-import net.minecraft.world.item.Item
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.alchemy.PotionBrewing
+import net.minecraft.world.item.{Item, ItemStack}
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
-import net.minecraftforge.common.capabilities.Capability
-import net.minecraftforge.common.capabilities.ForgeCapabilities
+import net.minecraft.world.{Containers, MenuProvider, SimpleContainer}
+import net.minecraftforge.common.capabilities.{Capability, ForgeCapabilities}
 import net.minecraftforge.common.util.LazyOptional
-import net.minecraftforge.items.IItemHandler
-import net.minecraftforge.items.ItemStackHandler
-import org.jetbrains.annotations.NotNull
-import org.jetbrains.annotations.Nullable
+import net.minecraftforge.items.{IItemHandler, ItemStackHandler}
+import org.jetbrains.annotations.{NotNull, Nullable}
 
 import java.util.Optional
 import scala.language.postfixOps

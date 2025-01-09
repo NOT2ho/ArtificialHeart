@@ -6,9 +6,7 @@ import net.minecraft.util.RandomSource
 import net.minecraft.util.valueproviders.IntProvider
 import net.minecraft.world.level.LevelSimulatedReader
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.foliagePlacerParts
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType
+import net.minecraft.world.level.levelgen.feature.foliageplacers.{AcaciaFoliagePlacer, FoliagePlacer, FoliagePlacerType}
 
 object PinkTreeFoliagePlacer {
   val CODEC: Codec[PinkTreeFoliagePlacer] =
@@ -22,19 +20,19 @@ object PinkTreeFoliagePlacer {
     )
 }
 
-class PinkTreeFoliagePlacer(pRadius: IntProvider, pOffset: IntProvider, private val height: Int) extends FoliagePlacer(pRadius, pOffset) {
+class PinkTreeFoliagePlacer(pRadius: IntProvider, pOffset: IntProvider, private val height: Int) extends AcaciaFoliagePlacer(pRadius, pOffset) {
   private def getRadius(): IntProvider = pRadius
   private def getOffset(): IntProvider = pOffset
   
   override protected def `type`: FoliagePlacerType[_] = FoliagePlacerTypes.PINK_TREE_FOLIAGE_PLACER.get
 
-  override protected def createFoliage(pLevel: LevelSimulatedReader, pBlockSetter: FoliagePlacer.FoliageSetter, pRandom: RandomSource, pConfig: TreeConfiguration, pMaxFreeTreeHeight: Int, pAttachment: FoliagePlacer.FoliageAttachment, pFoliageHeight: Int, pFoliageRadius: Int, pOffset: Int): Unit = {
-    this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, pAttachment.pos.above(0), 2, 2, pAttachment.doubleTrunk)
-    this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, pAttachment.pos.above(1), 2, 2, pAttachment.doubleTrunk)
-    this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, pAttachment.pos.above(2), 2, 2, pAttachment.doubleTrunk)
-  }
-
-  override def foliageHeight(pRandom: RandomSource, pHeight: Int, pConfig: TreeConfiguration): Int = this.height
+//  override protected def createFoliage(pLevel: LevelSimulatedReader, pBlockSetter: FoliagePlacer.FoliageSetter, pRandom: RandomSource, pConfig: TreeConfiguration, pMaxFreeTreeHeight: Int, pAttachment: FoliagePlacer.FoliageAttachment, pFoliageHeight: Int, pFoliageRadius: Int, pOffset: Int): Unit = {
+//    this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, pAttachment.pos.above(0), 2, 2, pAttachment.doubleTrunk)
+//    this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, pAttachment.pos.above(1), 2, 2, pAttachment.doubleTrunk)
+//    this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, pAttachment.pos.above(2), 2, 2, pAttachment.doubleTrunk)
+//  }
+//
+//  override def foliageHeight(pRandom: RandomSource, pHeight: Int, pConfig: TreeConfiguration): Int = this.height
 
   override protected def shouldSkipLocation(pRandom: RandomSource, pLocalX: Int, pLocalY: Int, pLocalZ: Int, pRange: Int, pLarge: Boolean) = false
 }

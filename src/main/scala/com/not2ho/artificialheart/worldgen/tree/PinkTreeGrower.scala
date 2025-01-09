@@ -9,5 +9,7 @@ import org.jetbrains.annotations.Nullable
 
 
 class PinkTreeGrower extends AbstractTreeGrower {
-  @Nullable override protected def getConfiguredFeature(pRandom: RandomSource, pHasFlowers: Boolean): ResourceKey[ConfiguredFeature[_, _]] = PinkConfiguredFeatures.PINK_TREE_KEY
+  @Nullable
+  override protected def getConfiguredFeature(pRandom: RandomSource, pHasFlowers: Boolean)
+  : ResourceKey[ConfiguredFeature[_, _]] = PinkConfiguredFeatures.PINK_TREE_KEY
 }

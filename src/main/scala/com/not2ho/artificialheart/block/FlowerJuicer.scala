@@ -4,16 +4,13 @@ import com.not2ho.artificialheart.entity
 import com.not2ho.artificialheart.entity.{BlockEntities, FlowerJuicerEntity}
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.world.InteractionHand
-import net.minecraft.world.InteractionResult
+import net.minecraft.world.{InteractionHand, InteractionResult}
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.{BaseEntityBlock, Block, RenderShape}
 import net.minecraft.world.level.block.BaseEntityBlock.createTickerHelper
-import net.minecraft.world.level.block.entity.BlockEntity
-import net.minecraft.world.level.block.entity.BlockEntityTicker
-import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.entity.{BlockEntity, BlockEntityTicker, BlockEntityType}
 import net.minecraft.world.level.block.state.{BlockBehaviour, BlockState}
+import net.minecraft.world.level.block.{BaseEntityBlock, Block, RenderShape}
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.{CollisionContext, VoxelShape}
 import net.minecraftforge.network.NetworkHooks

@@ -1,11 +1,9 @@
 package com.not2ho.artificialheart.screen
 
-import com.not2ho.artificialheart.ArtificialHeart
 import com.not2ho.artificialheart.block.PinkBlocks.FLOWER_JUICER
 import com.not2ho.artificialheart.entity.FlowerJuicerEntity
 import net.minecraft.network.FriendlyByteBuf
-import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.entity.player.Player
+import net.minecraft.world.entity.player.{Inventory, Player}
 import net.minecraft.world.inventory.*
 import net.minecraft.world.inventory.AbstractContainerMenu.checkContainerSize
 import net.minecraft.world.item.ItemStack

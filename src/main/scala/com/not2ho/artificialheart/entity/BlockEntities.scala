@@ -1,13 +1,11 @@
 package com.not2ho.artificialheart.entity
 
-import com.not2ho.artificialheart.entity.*
 import com.not2ho.artificialheart.ArtificialHeart
 import com.not2ho.artificialheart.block.PinkBlocks.FLOWER_JUICER
+import com.not2ho.artificialheart.entity.*
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraftforge.eventbus.api.IEventBus
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.ForgeRegistries
-import net.minecraftforge.registries.RegistryObject
+import net.minecraftforge.registries.{DeferredRegister, ForgeRegistries, RegistryObject}
 
 object BlockEntities {
   val BLOCK_ENTITIES: DeferredRegister[BlockEntityType[_]] = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ArtificialHeart.MOD_ID)

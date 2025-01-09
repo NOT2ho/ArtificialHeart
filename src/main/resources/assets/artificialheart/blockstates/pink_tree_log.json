@@ -1,7 +1,16 @@
 {
-    "variants": {
-      "": {
-        "model": "artificialheart:block/pink_tree_log"
-      }
+  "variants": {
+    "axis=x": {
+      "model": "artificialheart:block/pink_tree_log_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "artificialheart:block/pink_tree_log"
+    },
+    "axis=z": {
+      "model": "artificialheart:block/pink_tree_log_horizontal",
+      "x": 90
     }
   }
+}

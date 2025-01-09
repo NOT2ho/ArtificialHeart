@@ -7,7 +7,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.config.ModConfigEvent
 import net.minecraftforge.registries.ForgeRegistries
-import scala.jdk.CollectionConverters._
+
+import scala.jdk.CollectionConverters.*
 
 @Mod.EventBusSubscriber(modid = ArtificialHeart.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 object Config {

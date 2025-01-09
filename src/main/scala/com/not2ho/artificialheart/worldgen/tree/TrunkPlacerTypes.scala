@@ -3,10 +3,9 @@ package com.not2ho.artificialheart.worldgen.tree
 
 import com.not2ho.artificialheart.ArtificialHeart
 import net.minecraft.core.registries.Registries
-import net.minecraft.world.level.levelgen.feature.trunkplacers.{TrunkPlacer, TrunkPlacerType}
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType
 import net.minecraftforge.eventbus.api.IEventBus
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.RegistryObject
+import net.minecraftforge.registries.{DeferredRegister, RegistryObject}
 
 
 object TrunkPlacerTypes {

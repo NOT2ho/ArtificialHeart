@@ -1,10 +1,8 @@
 package com.not2ho.artificialheart.recipe
 
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
+import com.google.gson.{JsonArray, JsonObject}
 import com.not2ho.artificialheart.ArtificialHeart
-import net.minecraft.core.NonNullList
-import net.minecraft.core.RegistryAccess
+import net.minecraft.core.{NonNullList, RegistryAccess}
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.GsonHelper

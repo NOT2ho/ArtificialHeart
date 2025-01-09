@@ -3,13 +3,10 @@ package com.not2ho.artificialheart.fluid
 import com.not2ho.artificialheart.ArtificialHeart
 import com.not2ho.artificialheart.block.PinkBlocks.PINK_LIQUID_BLOCK
 import com.not2ho.artificialheart.item.PinkItems.PINK_LIQUID_BUCKET
-import net.minecraft.world.level.material.FlowingFluid
-import net.minecraft.world.level.material.Fluid
+import net.minecraft.world.level.material.{FlowingFluid, Fluid}
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.fluids.ForgeFlowingFluid
-import net.minecraftforge.registries.DeferredRegister
-import net.minecraftforge.registries.ForgeRegistries
-import net.minecraftforge.registries.RegistryObject
+import net.minecraftforge.registries.{DeferredRegister, ForgeRegistries, RegistryObject}
 
 object PinkLiquid {
   val FLUIDS: DeferredRegister[Fluid] =

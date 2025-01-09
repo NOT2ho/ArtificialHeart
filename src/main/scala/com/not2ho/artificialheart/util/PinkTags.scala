@@ -2,9 +2,7 @@ package com.not2ho.artificialheart.util
 
 import com.not2ho.artificialheart.ArtificialHeart
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.tags.BlockTags
-import net.minecraft.tags.ItemTags
-import net.minecraft.tags.TagKey
+import net.minecraft.tags.{BlockTags, ItemTags, TagKey}
 import net.minecraft.world.level.block.Block
 
 

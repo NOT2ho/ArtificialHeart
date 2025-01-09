@@ -8,16 +8,11 @@ import net.minecraft.data.worldgen.BootstapContext
 import net.minecraft.resources.{ResourceKey, ResourceLocation}
 import net.minecraft.tags.BlockTags
 import net.minecraft.util.valueproviders.ConstantInt
-import net.minecraft.world.level.block.Blocks
-import net.minecraft.world.level.levelgen.feature.{ConfiguredFeature, Feature}
 import net.minecraft.world.level.levelgen.feature.configurations.{FeatureConfiguration, OreConfiguration, TreeConfiguration}
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize
-import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider
-import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer
-import net.minecraft.world.level.levelgen.structure.templatesystem.{BlockMatchTest, RuleTest, TagMatchTest}
-import net.minecraftforge.data.event.GatherDataEvent
-import net.minecraftforge.registries.{DeferredRegister, ForgeRegistries}
+import net.minecraft.world.level.levelgen.feature.{ConfiguredFeature, Feature}
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest
 
 import java.util
 
@@ -33,13 +28,14 @@ object PinkConfiguredFeatures {
     register(context, OVERWORLD_HEART_ORE_KEY, Feature.ORE, new OreConfiguration(overworldHeartOres, 9))
     register(context, PINK_TREE_KEY, Feature.TREE
       , new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(PINK_TREE_LOG.get)
-      , new PinkTreeTrunkPlacer(8, 40, 3)
+      , new PinkTreeTrunkPlacer(6, 4, 3)
       , BlockStateProvider.simple(PINK_TREE_LEAVES.get)
-      , new PinkTreeFoliagePlacer(ConstantInt.of(8), ConstantInt.of(6), 7)
+      , new PinkTreeFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 2)
       , new TwoLayersFeatureSize(1, 0, 2)).build)
   }
 
-  def registerKey(name: String): ResourceKey[ConfiguredFeature[_, _]] = ResourceKey.create(Registries.CONFIGURED_FEATURE
+  def registerKey(name: String): ResourceKey[ConfiguredFeature[_, _]] =
+    ResourceKey.create(Registries.CONFIGURED_FEATURE
     , new ResourceLocation(ArtificialHeart.MOD_ID, name))
 
   private def register[FC <: FeatureConfiguration, F <: Feature[FC]](context: BootstapContext[ConfiguredFeature[_, _]]

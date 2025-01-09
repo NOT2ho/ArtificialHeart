@@ -4,11 +4,9 @@ import com.not2ho.artificialheart.ArtificialHeart
 import com.not2ho.artificialheart.item.PinkItems.HEART_INGOT
 import com.not2ho.artificialheart.util.PinkTags
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.item.Tier
-import net.minecraft.world.item.Tiers
+import net.minecraft.world.item.{Tier, Tiers}
 import net.minecraft.world.item.crafting.Ingredient
-import net.minecraftforge.common.ForgeTier
-import net.minecraftforge.common.TierSortingRegistry
+import net.minecraftforge.common.{ForgeTier, TierSortingRegistry}
 
 import java.util
 

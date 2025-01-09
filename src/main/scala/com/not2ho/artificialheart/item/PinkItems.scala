@@ -1,10 +1,10 @@
 package com.not2ho.artificialheart.item
 
-import com.not2ho.artificialheart.ArtificialHeart.{MOD_ID, ITEMS}
+import com.not2ho.artificialheart.ArtificialHeart.ITEMS
 import com.not2ho.artificialheart.fluid.PinkLiquid
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.{BucketItem, Item, Items, SwordItem}
-import net.minecraftforge.registries.{DeferredRegister, ForgeRegistries, RegistryObject}
+import net.minecraftforge.registries.RegistryObject
 
 object PinkItems {
   
