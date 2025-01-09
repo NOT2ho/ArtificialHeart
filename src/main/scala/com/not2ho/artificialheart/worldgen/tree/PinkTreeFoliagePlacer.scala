@@ -26,7 +26,7 @@ class PinkTreeFoliagePlacer(pRadius: IntProvider, pOffset: IntProvider, private 
   private def getRadius(): IntProvider = pRadius
   private def getOffset(): IntProvider = pOffset
   
-  override protected def `type`: FoliagePlacerType[_] = FoliagePlacers.PINK_TREE_FOLIAGE_PLACER.get
+  override protected def `type`: FoliagePlacerType[_] = FoliagePlacerTypes.PINK_TREE_FOLIAGE_PLACER.get
 
   override protected def createFoliage(pLevel: LevelSimulatedReader, pBlockSetter: FoliagePlacer.FoliageSetter, pRandom: RandomSource, pConfig: TreeConfiguration, pMaxFreeTreeHeight: Int, pAttachment: FoliagePlacer.FoliageAttachment, pFoliageHeight: Int, pFoliageRadius: Int, pOffset: Int): Unit = {
     this.placeLeavesRow(pLevel, pBlockSetter, pRandom, pConfig, pAttachment.pos.above(0), 2, 2, pAttachment.doubleTrunk)

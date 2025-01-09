@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer
 import net.minecraft.world.level.levelgen.structure.templatesystem.{BlockMatchTest, RuleTest, TagMatchTest}
 import net.minecraftforge.data.event.GatherDataEvent
+import net.minecraftforge.registries.{DeferredRegister, ForgeRegistries}
 
 import java.util
 

@@ -8,7 +8,7 @@ import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.RegistryObject
 
 
-object FoliagePlacers {
+object FoliagePlacerTypes {
   val FOLIAGE_PLACERS: DeferredRegister[FoliagePlacerType[_]] = DeferredRegister.create(Registries.FOLIAGE_PLACER_TYPE, ArtificialHeart.MOD_ID)
   val PINK_TREE_FOLIAGE_PLACER: RegistryObject[FoliagePlacerType[PinkTreeFoliagePlacer]] = FOLIAGE_PLACERS.register("pink_tree_foliage_placer", () => new FoliagePlacerType(PinkTreeFoliagePlacer.CODEC))
 

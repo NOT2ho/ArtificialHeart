@@ -8,7 +8,7 @@ import com.not2ho.artificialheart.recipe.PinkRecipe
 import com.not2ho.artificialheart.screen.{FlowerJuicerScreen, MenuTypes}
 import com.not2ho.artificialheart.util.PinkDatapackBuiltinEntriesProvider
 import com.not2ho.artificialheart.worldgen.PinkConfiguredFeatures
-import com.not2ho.artificialheart.worldgen.tree.{FoliagePlacers, PinkTreeGrower, TrunkPlacerTypes}
+import com.not2ho.artificialheart.worldgen.tree.{FoliagePlacerTypes, PinkTreeGrower, TrunkPlacerTypes}
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.MenuScreens
 import net.minecraft.core.registries.Registries
@@ -249,14 +249,13 @@ object ArtificialHeart {
     val modEventBus = FMLJavaModLoadingContext.get().getModEventBus
 
     BLOCKS.register(modEventBus)
-
+    FoliagePlacerTypes.register(modEventBus)
+    TrunkPlacerTypes.register(modEventBus)
     BlockEntities.register(modEventBus)
     PinkRecipe.register(modEventBus)
     MenuTypes.register(modEventBus)
     PinkLiquid.register(modEventBus)
 
-    TrunkPlacerTypes.register(modEventBus)
-    FoliagePlacers.register(modEventBus)
     PinkFluid.register(modEventBus)
 
     ITEMS.register(modEventBus)
@@ -265,10 +264,8 @@ object ArtificialHeart {
     modEventBus.addListener(this.commonSetup)
     MinecraftForge.EVENT_BUS.register(this)
     //MinecraftForge.EVENT_BUS.register(ClientModEvents)
-
     modEventBus.addListener(this.addCreative)
     ModLoadingContext.get.registerConfig(ModConfig.Type.COMMON, Config.SPEC)
-
     modEventBus.addListener(this.dataSetup)
 
     if (FMLEnvironment.dist.isClient) {
