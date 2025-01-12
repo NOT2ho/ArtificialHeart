@@ -34,5 +34,5 @@ class PinkTreeFoliagePlacer(pRadius: IntProvider, pOffset: IntProvider, private 
 //
 //  override def foliageHeight(pRandom: RandomSource, pHeight: Int, pConfig: TreeConfiguration): Int = this.height
 
-  override protected def shouldSkipLocation(pRandom: RandomSource, pLocalX: Int, pLocalY: Int, pLocalZ: Int, pRange: Int, pLarge: Boolean) = false
+ // override protected def shouldSkipLocation(pRandom: RandomSource, pLocalX: Int, pLocalY: Int, pLocalZ: Int, pRange: Int, pLarge: Boolean) = false
 }

@@ -1,19 +1,23 @@
 package com.not2ho.artificialheart
 
+import com.mojang.serialization.Codec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.not2ho.artificialheart.ArtificialHeart.{LOGGER, MOD_ID}
 import com.not2ho.artificialheart.block.PinkBlocks.PINK_GRASS_BLOCK_ITEM
 import com.not2ho.artificialheart.entity.BlockEntities
 import com.not2ho.artificialheart.fluid.{PinkFluid, PinkLiquid}
 import com.not2ho.artificialheart.recipe.PinkRecipe
+import com.not2ho.artificialheart.register.PinkDatapackBuiltinEntriesProvider
 import com.not2ho.artificialheart.screen.{FlowerJuicerScreen, MenuTypes}
-import com.not2ho.artificialheart.util.PinkDatapackBuiltinEntriesProvider
+import com.not2ho.artificialheart.worldgen.biome.PinkBiomes.PINK_AREA
 import com.not2ho.artificialheart.worldgen.tree.{FoliagePlacerTypes, TrunkPlacerTypes}
 import net.minecraft.client.gui.screens.MenuScreens
 import net.minecraft.client.renderer.{ItemBlockRenderTypes, RenderType}
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.{CreativeModeTab, CreativeModeTabs, Item, ItemStack}
 import net.minecraft.world.level.block.Block
-import net.minecraftforge.common.MinecraftForge
+import net.minecraftforge.common.{BiomeManager, MinecraftForge}
+import net.minecraftforge.common.world.BiomeModifier
 import net.minecraftforge.data.event.GatherDataEvent
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent
 import net.minecraftforge.event.server.ServerStartingEvent
@@ -27,6 +31,8 @@ import net.minecraftforge.fml.loading.FMLEnvironment
 import net.minecraftforge.registries.{DeferredRegister, ForgeRegistries, RegistryObject}
 import org.apache.logging.log4j.LogManager
 
+import java.util.concurrent.CompletableFuture
+
 
 @Mod(ArtificialHeart.MOD_ID)
 object ArtificialHeart {
@@ -34,7 +40,6 @@ object ArtificialHeart {
 
 
   val LOGGER = LogManager.getLogger
-
 
   val BLOCKS: DeferredRegister[Block] = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID)
   val ITEMS: DeferredRegister[Item] = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID)
@@ -79,6 +84,8 @@ object ArtificialHeart {
   }
 
   private def commonSetup(event: FMLCommonSetupEvent): Unit = {
+    val _: CompletableFuture[Void] =
+      event.enqueueWork(() => BiomeManager.addAdditionalOverworldBiomes(PINK_AREA))
   }
 
   private def addCreative(event: BuildCreativeModeTabContentsEvent): Unit = {
@@ -95,6 +102,8 @@ object ArtificialHeart {
     ItemBlockRenderTypes.setRenderLayer(PinkLiquid.SOURCE_PINK_LIQUID.get(), RenderType.translucent)
     ItemBlockRenderTypes.setRenderLayer(PinkLiquid.FLOWING_PINK_LIQUID.get(), RenderType.translucent)
     MenuScreens.register(MenuTypes.FLOWER_JUICER_MENU.get(), new FlowerJuicerScreen(_, _, _))
+
+
   }
 
   /*@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Array(Dist.CLIENT))

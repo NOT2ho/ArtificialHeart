@@ -1,4 +1,4 @@
-package com.not2ho.artificialheart.util
+package com.not2ho.artificialheart.tag
 
 import com.not2ho.artificialheart.ArtificialHeart
 import net.minecraft.resources.ResourceLocation

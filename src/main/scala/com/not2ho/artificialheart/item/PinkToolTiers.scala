@@ -2,7 +2,7 @@ package com.not2ho.artificialheart.item
 
 import com.not2ho.artificialheart.ArtificialHeart
 import com.not2ho.artificialheart.item.PinkItems.HEART_INGOT
-import com.not2ho.artificialheart.util.PinkTags
+import com.not2ho.artificialheart.tag.PinkTags
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.{Tier, Tiers}
 import net.minecraft.world.item.crafting.Ingredient
