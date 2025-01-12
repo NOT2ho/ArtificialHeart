@@ -28,7 +28,7 @@ object PinkNoiseGenSettings {
     val settings = NoiseSettings.create( -64, 384, 1, 2 )
     val surface = if (pinksurface) PinkSurfaceRules.strawberryDays
                   else SurfaceRuleData.overworld
-    new NoiseGeneratorSettings( settings, Blocks.PINK_WOOL.defaultBlockState, PinkBlocks.PINK_LIQUID_BLOCK.get().defaultBlockState,
+    new NoiseGeneratorSettings( settings, Blocks.STONE.defaultBlockState, PinkBlocks.PINK_LIQUID_BLOCK.get().defaultBlockState,
                                 PinkNoiseRouterData.strawberryDays( densityFunctions, noiseParameters ),
                                 surface, util.List.of, PinkDimensions.SEA_LEVEL, false, true, true, true )
   }

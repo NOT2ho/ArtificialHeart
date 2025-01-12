@@ -45,7 +45,7 @@ object PinkBlocks {
   val DEEPSLATE_HEART_ORE_ITEM: RegistryObject[Item] = ITEMS.register("deepslate_heart_ore"
     , () => new BlockItem(DEEPSLATE_HEART_ORE.get(), new Item.Properties()))
 
-  val PINK_GRASS_BLOCK: RegistryObject[Block] = BLOCKS.register("pink_grass_block", () => new GrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)))
+  val PINK_GRASS_BLOCK: RegistryObject[Block] = BLOCKS.register("pink_grass_block", () => new PinkGrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK)))
   val PINK_SAND : RegistryObject[Block] = BLOCKS.register( "pink_sand", ( ) => new SandBlock(1, BlockBehaviour.Properties.copy( Blocks.SAND ) ) )
 
   val HEART_BLOCK: RegistryObject[Block] = BLOCKS.register("heart_block", () => new Block(BlockBehaviour.Properties.of()
