@@ -35,11 +35,11 @@ object PinkDimensions {
   val SEA_LEVEL = 63
 
   def bootstrapType(context: BootstapContext[DimensionType]): Unit = {
-    context.register(STRAWBERRY_DAYS_TYPE, new DimensionType(OptionalLong.of(12000), // fixedTime
+    context.register(STRAWBERRY_DAYS_TYPE, new DimensionType(OptionalLong.empty(), // fixedTime
                                                         true, // hasSkylight
                                                         false, // hasCeiling
                                                         false, // ultraWarm
-                                                        false, // natural
+                                                        true, // natural
                                                         1.0, // coordinateScale
                                                         true, // bedWorks
                                                         false, // respawnAnchorWorks
@@ -66,17 +66,17 @@ object PinkDimensions {
                                                                     new Climate.ParameterList(
                                                                       util.List.of(
                                                                         Pair.of(
-                                                                          Climate.parameters(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F)
+                                                                          Climate.parameters(0.1F, 0.2F, 0.3F, 0.4F, 0.5F, 0.0F, 0.0F)
                                                                           , biomeRegistry.getOrThrow(PinkBiomes.PINK_AREA)
                                                                           )
                                                                         , Pair.of(Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F)
                                                                                   , biomeRegistry.getOrThrow(PinkBiomes.PINK_AREA)
                                                                                   )
                                                                         , Pair.of(Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F)
-                                                                                  , biomeRegistry.getOrThrow(PinkBiomes.PINK_AREA)
+                                                                                  , biomeRegistry.getOrThrow( PinkBiomes.KIRAKIRA_ZONE )
                                                                                   )
                                                                         , Pair.of(Climate.parameters(0.4F, 0.3F, 0.2F, 0.1F, 0.0F, 0.0F, 0.0F)
-                                                                                  , biomeRegistry.getOrThrow(PinkBiomes.PINK_AREA)
+                                                                                  , biomeRegistry.getOrThrow( PinkBiomes.KIRAKIRA_ZONE )
                                                                                   )
                                                                         )
                                                                       )

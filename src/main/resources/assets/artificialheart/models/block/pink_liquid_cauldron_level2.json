@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/template_cauldron_level2",
+  "textures": {
+    "bottom": "artificialheart:block/cauldron_bottom",
+    "content": "artificialheart:block/pink_liquid_still",
+    "inside": "artificialheart:block/cauldron_inner",
+    "particle": "artificialheart:block/cauldron_side",
+    "side": "artificialheart:block/cauldron_side",
+    "top": "artificialheart:block/cauldron_top"
+  }
+}

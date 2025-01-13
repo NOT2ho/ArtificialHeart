@@ -3,6 +3,7 @@ package com.not2ho.artificialheart
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.not2ho.artificialheart.ArtificialHeart.{LOGGER, MOD_ID}
+import com.not2ho.artificialheart.block.PinkBlocks
 import com.not2ho.artificialheart.block.PinkBlocks.PINK_GRASS_BLOCK_ITEM
 import com.not2ho.artificialheart.entity.BlockEntities
 import com.not2ho.artificialheart.fluid.{PinkFluid, PinkLiquid}
@@ -12,10 +13,12 @@ import com.not2ho.artificialheart.screen.{FlowerJuicerScreen, MenuTypes}
 import com.not2ho.artificialheart.worldgen.biome.PinkBiomes.PINK_AREA
 import com.not2ho.artificialheart.worldgen.tree.{FoliagePlacerTypes, TrunkPlacerTypes}
 import net.minecraft.client.gui.screens.MenuScreens
-import net.minecraft.client.renderer.{ItemBlockRenderTypes, RenderType}
+import net.minecraft.client.renderer.{BiomeColors, ItemBlockRenderTypes, RenderType}
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.{CreativeModeTab, CreativeModeTabs, Item, ItemStack}
+import net.minecraft.world.level.{FoliageColor, GrassColor}
 import net.minecraft.world.level.block.Block
+import net.minecraftforge.client.event.RegisterColorHandlersEvent
 import net.minecraftforge.common.{BiomeManager, MinecraftForge}
 import net.minecraftforge.common.world.BiomeModifier
 import net.minecraftforge.data.event.GatherDataEvent
@@ -74,7 +77,7 @@ object ArtificialHeart {
     //MinecraftForge.EVENT_BUS.register(ClientModEvents)
     modEventBus.addListener(this.addCreative)
     ModLoadingContext.get.registerConfig(ModConfig.Type.COMMON, Config.SPEC)
-
+    modEventBus.addListener(this.blockColorHandlerEvent)
 
     if (FMLEnvironment.dist.isClient) {
       modEventBus.addListener(this.onClientSetup)
@@ -96,14 +99,47 @@ object ArtificialHeart {
   def onServerStarting(event: ServerStartingEvent): Unit = {
   }
 
+  def blockColorHandlerEvent( event : RegisterColorHandlersEvent.Block ) : Unit = {
+    event.register( ( state, world, pos, tintIndex ) => {
+      if (world != null && pos != null) {
+        BiomeColors.getAverageGrassColor( world, pos )
+      }
+      else {
+        GrassColor.getDefaultColor
+      }
 
+    }, PinkBlocks.PINK_GRASS_BLOCK.get())
+
+    event.register( ( state, world, pos, tintIndex ) => {
+      if (world != null && pos != null) {
+        BiomeColors.getAverageFoliageColor( world, pos )
+      }
+      else {
+        FoliageColor.getDefaultColor
+      }
+
+    }, PinkBlocks.PINK_TREE_LEAVES.get()
+                    )
+    event.register( ( state, world, pos, tintIndex ) => {
+      if (world != null && pos != null) {
+        BiomeColors.getAverageWaterColor( world, pos )
+      }
+      else {
+        -1
+      }
+
+    }, PinkBlocks.PINK_LIQUID_BLOCK.get()
+    )
+  }
 
   def onClientSetup(event: FMLClientSetupEvent): Unit = {
     ItemBlockRenderTypes.setRenderLayer(PinkLiquid.SOURCE_PINK_LIQUID.get(), RenderType.translucent)
     ItemBlockRenderTypes.setRenderLayer(PinkLiquid.FLOWING_PINK_LIQUID.get(), RenderType.translucent)
     MenuScreens.register(MenuTypes.FLOWER_JUICER_MENU.get(), new FlowerJuicerScreen(_, _, _))
+  }
 
-
+  def registerBlockColors( event: RegisterColorHandlersEvent.Block  ): Unit = {
+    event.register( null )
   }
 
   /*@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Array(Dist.CLIENT))
@@ -129,11 +165,8 @@ object DataSetupEvents {
     val helper = event.getExistingFileHelper
     val server = event.includeServer
     val datapackEntries = new PinkDatapackBuiltinEntriesProvider(output, provider)
-    LOGGER.info("ㅇ라ㅓ암ㅇㄹ아ㅣㄹㄴㅇ라ㅣㄴㅁㄻㄹ이ㅏㅁㄴㄹㅇ닐ㅈ댜ㅐㅂㄱㅈㄷ아니")
-    println("아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니아니")
     generator.addProvider(server, datapackEntries)
     datapackEntries.getRegistryProvider()
-    LOGGER.info("ㅇ라ㅓ암ㅇㄹ아ㅣㄹㄴㅇ라ㅣㄴㅁㄻㄹ이ㅏㅁㄴㄹㅇ닐ㅈ댜ㅐㅂㄱㅈㄷ아니2")
     //    val client = event.includeClient
   }
 }

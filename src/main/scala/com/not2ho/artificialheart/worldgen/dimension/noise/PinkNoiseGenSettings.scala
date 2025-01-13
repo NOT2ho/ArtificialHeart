@@ -25,7 +25,7 @@ object PinkNoiseGenSettings {
 
   def createNoise( densityFunctions : HolderGetter[DensityFunction], noiseParameters : HolderGetter[NormalNoise
   .NoiseParameters], pinksurface : Boolean ) : NoiseGeneratorSettings = {
-    val settings = NoiseSettings.create( -64, 384, 1, 2 )
+    val settings = NoiseSettings.create( 0, 256, 4, 4 )
     val surface = if (pinksurface) PinkSurfaceRules.strawberryDays
                   else SurfaceRuleData.overworld
     new NoiseGeneratorSettings( settings, Blocks.STONE.defaultBlockState, PinkBlocks.PINK_LIQUID_BLOCK.get().defaultBlockState,

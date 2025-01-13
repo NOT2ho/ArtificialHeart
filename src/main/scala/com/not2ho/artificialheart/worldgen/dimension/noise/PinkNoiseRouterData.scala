@@ -18,15 +18,14 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise
 
 
 object PinkNoiseRouterData {
-  private val BLENDING_FACTOR = DensityFunctions.constant( 10.0 )
+  private val BLENDING_FACTOR = DensityFunctions.constant( 20.0 )
   private val BLENDING_JAGGEDNESS = DensityFunctions.zero
   private val AMPLIFIED = true
   private val Y = vanillaKey( "y" )
   private val SHIFT_X = vanillaKey( "shift_x" )
   private val SHIFT_Z = vanillaKey( "shift_z" )
   private val BASE_3D_NOISE_OVERWORLD = vanillaKey( "overworld/base_3d_noise" )
-  private val SPAGHETTI_ROUGHNESS_FUNCTION = vanillaKey(
-    "overworld/caves/spaghetti_roughness_function" )
+  private val SPAGHETTI_ROUGHNESS_FUNCTION = vanillaKey("overworld/caves/spaghetti_roughness_function" )
   private val ENTRANCES = vanillaKey( "overworld/caves/entrances" )
   private val NOODLE = vanillaKey( "overworld/caves/noodle" )
   private val PILLARS = vanillaKey( "overworld/caves/pillars" )
@@ -56,7 +55,7 @@ object PinkNoiseRouterData {
                                                                  .spline(
                                                                    PinkTerrainProvider.factor( continents, erosion, weirdness, ridgesFolded, AMPLIFIED ) ), BLENDING_FACTOR ) )
     val depth = context.register( DEPTH, DensityFunctions.add( DensityFunctions
-                                                                 .yClampedGradient( -64, 320, 1.5, -1.5 ), wrap( offset ) ) )
+                                                                 .yClampedGradient( 0, 320, 1.5, -1.5 ), wrap( offset ) ) )
     val jaggedness = context.register( JAGGEDNESS, splineWithBlending(
       DensityFunctions.spline( PinkTerrainProvider.jaggedness( continents, erosion, weirdness, ridgesFolded, AMPLIFIED ) )
       , BLENDING_JAGGEDNESS ) )
@@ -123,7 +122,7 @@ object PinkNoiseRouterData {
                           ).squeeze
   }
 
-  private def slidePinks( function : DensityFunction ) = slide( function, -64, 384, 80, 64, -0.078125, 0, 24, 0.1171875 )
+  private def slidePinks( function : DensityFunction ) = slide( function, 0, 256, 80, 64, -0.198125, 0, 24, 0.253333 )
 
   private def slide( function : DensityFunction, minY : Int, height : Int, topSliderLowerOffset : Int,
                      topSlideUpperOffset : Int, topSlideTarget : Double, bottomSlideLowerOffset : Int,
