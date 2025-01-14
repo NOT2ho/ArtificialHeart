@@ -40,8 +40,6 @@ import java.util.concurrent.CompletableFuture
 @Mod(ArtificialHeart.MOD_ID)
 object ArtificialHeart {
   final val MOD_ID = "artificialheart"
-  val addedPink = 0xa03911
-  val subedGreen = 0x48b518
 
   val LOGGER = LogManager.getLogger
 
@@ -103,10 +101,10 @@ object ArtificialHeart {
   def blockColorHandlerEvent( event : RegisterColorHandlersEvent.Block ) : Unit = {
     event.register( ( state, world, pos, tintIndex ) => {
       if (world != null && pos != null) {
-        0xf8a4bf.min(BiomeColors.getAverageGrassColor( world, pos ) - subedGreen + addedPink)
+        0xf58f84 - (BiomeColors.getAverageGrassColor( world, pos ) & 0x2f0000)
       }
       else {
-        GrassColor.getDefaultColor - subedGreen + addedPink
+        0xf58f84
       }
 
     }, PinkBlocks.PINK_GRASS_BLOCK.get())
@@ -114,7 +112,7 @@ object ArtificialHeart {
 
   def itemColorHandlerEvent( event : RegisterColorHandlersEvent.Item ) : Unit = {
     event.register( ( stack, tintIndex ) => {
-      0xf8a4bf
+      0xfba1a1
     }, PINK_GRASS_BLOCK.get()
                     )
   }
