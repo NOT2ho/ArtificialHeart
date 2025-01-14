@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.not2ho.artificialheart.ArtificialHeart.{LOGGER, MOD_ID}
 import com.not2ho.artificialheart.block.PinkBlocks
-import com.not2ho.artificialheart.block.PinkBlocks.PINK_GRASS_BLOCK_ITEM
+import com.not2ho.artificialheart.block.PinkBlocks.{PINK_GRASS_BLOCK, PINK_GRASS_BLOCK_ITEM}
 import com.not2ho.artificialheart.entity.BlockEntities
 import com.not2ho.artificialheart.fluid.{PinkFluid, PinkLiquid}
 import com.not2ho.artificialheart.recipe.PinkRecipe
@@ -40,7 +40,8 @@ import java.util.concurrent.CompletableFuture
 @Mod(ArtificialHeart.MOD_ID)
 object ArtificialHeart {
   final val MOD_ID = "artificialheart"
-
+  val addedPink = 0xa04411
+  val subedGreen = 0x48b518
 
   val LOGGER = LogManager.getLogger
 
@@ -78,7 +79,7 @@ object ArtificialHeart {
     modEventBus.addListener(this.addCreative)
     ModLoadingContext.get.registerConfig(ModConfig.Type.COMMON, Config.SPEC)
     modEventBus.addListener(this.blockColorHandlerEvent)
-
+    modEventBus.addListener(this.itemColorHandlerEvent)
     if (FMLEnvironment.dist.isClient) {
       modEventBus.addListener(this.onClientSetup)
     }
@@ -102,34 +103,21 @@ object ArtificialHeart {
   def blockColorHandlerEvent( event : RegisterColorHandlersEvent.Block ) : Unit = {
     event.register( ( state, world, pos, tintIndex ) => {
       if (world != null && pos != null) {
-        BiomeColors.getAverageGrassColor( world, pos )
+        BiomeColors.getAverageGrassColor( world, pos ) - subedGreen + addedPink
       }
       else {
-        GrassColor.getDefaultColor
+        GrassColor.getDefaultColor - subedGreen + addedPink
       }
 
     }, PinkBlocks.PINK_GRASS_BLOCK.get())
+  }
 
-    event.register( ( state, world, pos, tintIndex ) => {
-      if (world != null && pos != null) {
-        BiomeColors.getAverageFoliageColor( world, pos )
-      }
-      else {
-        FoliageColor.getDefaultColor
-      }
+  def itemColorHandlerEvent( event : RegisterColorHandlersEvent.Item ) : Unit = {
+    event.register( ( stack, tintIndex ) => {
+      GrassColor.get( 0.5D, 1.0D ) - subedGreen + addedPink + 0x110000
 
-    }, PinkBlocks.PINK_TREE_LEAVES.get()
+    }, PINK_GRASS_BLOCK.get()
                     )
-    event.register( ( state, world, pos, tintIndex ) => {
-      if (world != null && pos != null) {
-        BiomeColors.getAverageWaterColor( world, pos )
-      }
-      else {
-        -1
-      }
-
-    }, PinkBlocks.PINK_LIQUID_BLOCK.get()
-    )
   }
 
   def onClientSetup(event: FMLClientSetupEvent): Unit = {
