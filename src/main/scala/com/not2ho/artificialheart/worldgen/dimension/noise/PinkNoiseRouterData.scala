@@ -18,7 +18,7 @@ import net.minecraft.world.level.levelgen.synth.NormalNoise
 
 
 object PinkNoiseRouterData {
-  private val BLENDING_FACTOR = DensityFunctions.constant( 20.0 )
+  private val BLENDING_FACTOR = DensityFunctions.constant( 200000.0 )
   private val BLENDING_JAGGEDNESS = DensityFunctions.zero
   private val AMPLIFIED = true
   private val Y = vanillaKey( "y" )
@@ -55,12 +55,12 @@ object PinkNoiseRouterData {
                                                                  .spline(
                                                                    PinkTerrainProvider.factor( continents, erosion, weirdness, ridgesFolded, AMPLIFIED ) ), BLENDING_FACTOR ) )
     val depth = context.register( DEPTH, DensityFunctions.add( DensityFunctions
-                                                                 .yClampedGradient( 0, 320, 1.5, -1.5 ), wrap( offset ) ) )
+                                                                 .yClampedGradient( 0, 256, 4, -4 ), wrap( offset ) ) )
     val jaggedness = context.register( JAGGEDNESS, splineWithBlending(
       DensityFunctions.spline( PinkTerrainProvider.jaggedness( continents, erosion, weirdness, ridgesFolded, AMPLIFIED ) )
       , BLENDING_JAGGEDNESS ) )
     val jagged = DensityFunctions.mul( wrap( jaggedness ), DensityFunctions.noise( context.lookup(
-      Registries.NOISE ).getOrThrow( Noises.JAGGED ), 1500.0, 0.0 ).halfNegative )
+      Registries.NOISE ).getOrThrow( Noises.JAGGED ), 1000000.0, 0.0 ).halfNegative )
     context.register( SLOPED_CHEESE, DensityFunctions.add( noiseGradientDensity( wrap( factor ), DensityFunctions.add
       ( wrap( depth ), jagged ) ), wrap( densityFunctions.getOrThrow( BASE_3D_NOISE_OVERWORLD ) ) ) )
   }
@@ -81,9 +81,9 @@ object PinkNoiseRouterData {
     val aquiferLava = DensityFunctions.noise( noiseParameters.getOrThrow( Noises.AQUIFER_LAVA ) )
     val shiftX = getFunction( densityFunctions, SHIFT_X )
     val shiftZ = getFunction( densityFunctions, SHIFT_Z )
-    val temperature = DensityFunctions.shiftedNoise2d( shiftX, shiftZ, 0.25, noiseParameters
+    val temperature = DensityFunctions.shiftedNoise2d( shiftX, shiftZ, 0.9, noiseParameters
       .getOrThrow( Noises.TEMPERATURE ) )
-    val vegetation = DensityFunctions.shiftedNoise2d( shiftX, shiftZ, 0.25, noiseParameters
+    val vegetation = DensityFunctions.shiftedNoise2d( shiftX, shiftZ, 0.9, noiseParameters
       .getOrThrow( Noises.VEGETATION ) )
     val factor = getFunction( densityFunctions, FACTOR )
     val depth = getFunction( densityFunctions, DEPTH )
@@ -91,22 +91,22 @@ object PinkNoiseRouterData {
                                                                 depth )
     val slopedCheese = getFunction( densityFunctions, SLOPED_CHEESE )
     val densityfunction12 = DensityFunctions.min( slopedCheese, DensityFunctions.mul(
-      DensityFunctions.constant( 5.0 ), getFunction( densityFunctions, ENTRANCES ) ) )
-    val densityfunction13 = DensityFunctions.rangeChoice( slopedCheese, -1000000.0, 1.5625,
+      DensityFunctions.constant( 150000.0 ), getFunction( densityFunctions, ENTRANCES ) ) )
+    val densityfunction13 = DensityFunctions.rangeChoice( slopedCheese, -1000000.0, 1000000.0,
                                                           densityfunction12, underground(
         densityFunctions, noiseParameters, slopedCheese ) )
     val finalDensity = DensityFunctions.min( postProcess( slidePinks( densityfunction13 ) ),
                                              getFunction( densityFunctions, NOODLE ) )
     val y = getFunction( densityFunctions, Y )
-    val j = -60
-    val k = 50
+    val j = -600
+    val k = 500
     val veinToggle = yLimitedInterpolatable( y, DensityFunctions.noise( noiseParameters.getOrThrow(
       Noises.ORE_VEININESS ), 1.5, 1.5 ), j, k, 0 )
     val oreVeinA = yLimitedInterpolatable( y, DensityFunctions.noise( noiseParameters.getOrThrow(
       Noises.ORE_VEIN_A ), 4.0, 4.0 ), j, k, 0 ).abs
     val oreVeinB = yLimitedInterpolatable( y, DensityFunctions.noise( noiseParameters.getOrThrow(
       Noises.ORE_VEIN_B ), 4.0, 4.0 ), j, k, 0 ).abs
-    val veinRidged = DensityFunctions.add( DensityFunctions.constant( -0.08f ), DensityFunctions
+    val veinRidged = DensityFunctions.add( DensityFunctions.constant( -0.8f ), DensityFunctions
       .max( oreVeinA, oreVeinB ) )
     val veinGap = DensityFunctions.noise( noiseParameters.getOrThrow( Noises.ORE_GAP ) )
     new NoiseRouter( aquiferBarrier, aquiferFluidLevelFloodedness, aquiferFluidLevelSpread, aquiferLava,
@@ -122,7 +122,7 @@ object PinkNoiseRouterData {
                           ).squeeze
   }
 
-  private def slidePinks( function : DensityFunction ) = slide( function, 0, 256, 80, 64, -0.198125, 0, 24, 0.253333 )
+  private def slidePinks( function : DensityFunction ) = slide( function, 0, 256, 120, 64, -0.198125, 0, 24, 0.253333 )
 
   private def slide( function : DensityFunction, minY : Int, height : Int, topSliderLowerOffset : Int,
                      topSlideUpperOffset : Int, topSlideTarget : Double, bottomSlideLowerOffset : Int,
@@ -156,7 +156,7 @@ object PinkNoiseRouterData {
     val spaghetti2d = getFunction( densityFunctions, SPAGHETTI_2D )
     val spaghettiRoughness = getFunction( densityFunctions, SPAGHETTI_ROUGHNESS_FUNCTION )
     val caveLayer = DensityFunctions.noise( noiseParameters.getOrThrow( Noises.CAVE_LAYER ), 8.0 )
-    val densityfunction3 = DensityFunctions.mul( DensityFunctions.constant( 4.0 ), caveLayer.square )
+    val densityfunction3 = DensityFunctions.mul( DensityFunctions.constant( 8.0 ), caveLayer.square )
     val caveCheese = DensityFunctions.noise( noiseParameters.getOrThrow( Noises.CAVE_CHEESE ), 1.0
                                                                                                / 1.5 )
     val densityfunction5 = DensityFunctions.add( DensityFunctions.add( DensityFunctions.constant(
@@ -170,7 +170,7 @@ object PinkNoiseRouterData {
       densityFunctions, ENTRANCES ) ), DensityFunctions.add( spaghetti2d, spaghettiRoughness ) )
     val pillars = getFunction( densityFunctions, PILLARS )
     val pillarsThreshold = DensityFunctions.rangeChoice( pillars, -1000000.0, 0.03,
-                                                         DensityFunctions.constant( -1000000.0 ),
+                                                         DensityFunctions.constant( 1000000.0 ),
                                                          pillars )
     DensityFunctions.max( caves, pillarsThreshold )
   }

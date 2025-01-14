@@ -94,7 +94,7 @@ object PinkBiomes {
                          .waterColor( 0xffffff )
                          .waterFogColor( 0xffffff )
                          .skyColor( 0xffffff )
-                         .grassColorOverride( 0x505050 + 0x599548 )
+                         .grassColorOverride( -1 * ArtificialHeart.subedGreen )
                          .foliageColorOverride( 0xffffff )
                          .fogColor( 0xffffff )
                          .ambientMoodSound( AmbientMoodSettings.LEGACY_CAVE_SETTINGS )

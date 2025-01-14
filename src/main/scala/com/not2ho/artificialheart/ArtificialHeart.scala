@@ -40,7 +40,7 @@ import java.util.concurrent.CompletableFuture
 @Mod(ArtificialHeart.MOD_ID)
 object ArtificialHeart {
   final val MOD_ID = "artificialheart"
-  val addedPink = 0xb03911
+  val addedPink = 0xa03911
   val subedGreen = 0x48b518
 
   val LOGGER = LogManager.getLogger

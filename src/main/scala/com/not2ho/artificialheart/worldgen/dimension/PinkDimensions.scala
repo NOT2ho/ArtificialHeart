@@ -32,7 +32,7 @@ object PinkDimensions {
     (ArtificialHeart.MOD_ID, "strawberrydays"))
   val STRAWBERRY_DAYS_TYPE: ResourceKey[DimensionType] = ResourceKey.create(Registries.DIMENSION_TYPE, new
       ResourceLocation(ArtificialHeart.MOD_ID, "strawberrydays_type"))
-  val SEA_LEVEL = 63
+  val SEA_LEVEL = 127
 
   def bootstrapType(context: BootstapContext[DimensionType]): Unit = {
     context.register(STRAWBERRY_DAYS_TYPE, new DimensionType(OptionalLong.empty(), // fixedTime
