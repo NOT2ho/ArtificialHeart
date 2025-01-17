@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.not2ho.artificialheart.ArtificialHeart.{LOGGER, MOD_ID}
 import com.not2ho.artificialheart.block.PinkBlocks
 import com.not2ho.artificialheart.block.PinkBlocks.{PINK_GRASS_BLOCK, PINK_GRASS_BLOCK_ITEM}
-import com.not2ho.artificialheart.entity.BlockEntities
+import com.not2ho.artificialheart.entity.{BlockEntities, HumanlikeEntity, HumanlikeModel, HumanlikeRenderer, PinkEntities}
 import com.not2ho.artificialheart.fluid.{PinkFluid, PinkLiquid}
 import com.not2ho.artificialheart.recipe.PinkRecipe
 import com.not2ho.artificialheart.register.PinkDatapackBuiltinEntriesProvider
@@ -13,16 +13,18 @@ import com.not2ho.artificialheart.screen.{FlowerJuicerScreen, MenuTypes}
 import com.not2ho.artificialheart.worldgen.biome.PinkBiomes.PINK_AREA
 import com.not2ho.artificialheart.worldgen.tree.{FoliagePlacerTypes, TrunkPlacerTypes}
 import net.minecraft.client.gui.screens.MenuScreens
+import net.minecraft.client.renderer.entity.EntityRenderers
 import net.minecraft.client.renderer.{BiomeColors, ItemBlockRenderTypes, RenderType}
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.{CreativeModeTab, CreativeModeTabs, Item, ItemStack}
 import net.minecraft.world.level.{FoliageColor, GrassColor}
 import net.minecraft.world.level.block.Block
-import net.minecraftforge.client.event.RegisterColorHandlersEvent
+import net.minecraftforge.client.event.{EntityRenderersEvent, RegisterColorHandlersEvent}
 import net.minecraftforge.common.{BiomeManager, MinecraftForge}
 import net.minecraftforge.common.world.BiomeModifier
 import net.minecraftforge.data.event.GatherDataEvent
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent
 import net.minecraftforge.event.server.ServerStartingEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.ModLoadingContext
@@ -39,6 +41,7 @@ import java.util.concurrent.CompletableFuture
 
 @Mod(ArtificialHeart.MOD_ID)
 object ArtificialHeart {
+  val subedGreen = 0x48b518
   final val MOD_ID = "artificialheart"
 
   val LOGGER = LogManager.getLogger
@@ -64,7 +67,7 @@ object ArtificialHeart {
     PinkRecipe.register(modEventBus)
     MenuTypes.register(modEventBus)
     PinkLiquid.register(modEventBus)
-
+    PinkEntities.register(modEventBus)
     PinkFluid.register(modEventBus)
 
     ITEMS.register(modEventBus)
@@ -74,7 +77,9 @@ object ArtificialHeart {
 
     MinecraftForge.EVENT_BUS.register(this)
     //MinecraftForge.EVENT_BUS.register(ClientModEvents)
+    modEventBus.addListener(this.registerLayer)
     modEventBus.addListener(this.addCreative)
+    modEventBus.addListener(this.registerAttributes)
     ModLoadingContext.get.registerConfig(ModConfig.Type.COMMON, Config.SPEC)
     modEventBus.addListener(this.blockColorHandlerEvent)
     modEventBus.addListener(this.itemColorHandlerEvent)
@@ -83,6 +88,10 @@ object ArtificialHeart {
     }
 
     //modEventBus.addListener(this.dataSetup)
+  }
+
+  def registerAttributes( event : EntityAttributeCreationEvent ) : Unit = {
+    event.put( PinkEntities.HUMANLIKE.get(), HumanlikeEntity.createAttributes.build )
   }
 
   private def commonSetup(event: FMLCommonSetupEvent): Unit = {
@@ -96,6 +105,10 @@ object ArtificialHeart {
 
   @SubscribeEvent
   def onServerStarting(event: ServerStartingEvent): Unit = {
+  }
+
+  def registerLayer( event : EntityRenderersEvent.RegisterLayerDefinitions ) : Unit = {
+    event.registerLayerDefinition( HumanlikeModel.LAYER_LOCATION, () => HumanlikeModel.createBodyLayer )
   }
 
   def blockColorHandlerEvent( event : RegisterColorHandlersEvent.Block ) : Unit = {
@@ -121,6 +134,7 @@ object ArtificialHeart {
     ItemBlockRenderTypes.setRenderLayer(PinkLiquid.SOURCE_PINK_LIQUID.get(), RenderType.translucent)
     ItemBlockRenderTypes.setRenderLayer(PinkLiquid.FLOWING_PINK_LIQUID.get(), RenderType.translucent)
     MenuScreens.register(MenuTypes.FLOWER_JUICER_MENU.get(), new FlowerJuicerScreen(_, _, _))
+    EntityRenderers.register( PinkEntities.HUMANLIKE.get(), new HumanlikeRenderer(_) )
   }
 
   def registerBlockColors( event: RegisterColorHandlersEvent.Block  ): Unit = {

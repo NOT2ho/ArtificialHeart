@@ -1,12 +1,19 @@
 package com.not2ho.artificialheart.item
 
 import com.not2ho.artificialheart.ArtificialHeart.ITEMS
+import com.not2ho.artificialheart.entity.PinkEntities
 import com.not2ho.artificialheart.fluid.PinkLiquid
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.{BucketItem, Item, Items, SwordItem}
+import net.minecraftforge.common.ForgeSpawnEggItem
 import net.minecraftforge.registries.RegistryObject
 
 object PinkItems {
+
+  val HUMANLIKE_SPAWN_EGG : RegistryObject[Item] = ITEMS.register( "humanlike_spawn_egg",
+                                                                  () => new ForgeSpawnEggItem( PinkEntities.HUMANLIKE,
+                                                                                               0xf2cccc, 0xfff9fd,
+                                                                                               new Item.Properties() ) );
   
   val MASHED_HEART: RegistryObject[Item] = ITEMS.register("mashed_heart", () => new Item(new Item.Properties()))
 
